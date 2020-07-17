@@ -20,14 +20,17 @@ app.post('/users', (req, res)=>{
 
     personas.push({identification:id,name:nombre,lastname:apellido,age:edad,gender:genero,height:altura,weight:peso,telephones:tel});
     const n=personas.length;
-    res.status(200).send(`Página de usuarios ${n}`);
+    //res.status(200).send(`Página de usuarios ${n}`);
+    res.status(200).send({identification:id,name:nombre,lastname:apellido,age:edad,gender:genero,height:altura,weight:peso,telephones:tel});
 });
 app.get('/users', (req, res)=>{
     console.log("***********LISTA DE PERSONAS***********");
     personas.forEach(persona => console.log(persona));
     console.log("***********FIN LISTA DE PERSONAS***********");
     const n=personas.length;
-    res.status(200).send(`Total usuarios: ${n}`);
+        
+    //res.status(200).send(`Total usuarios: ${n}`);
+    res.status(200).send(personas);
 });
 app.get('/users/:id', (req, res)=>{
     const id = req.params.id;
@@ -44,7 +47,7 @@ app.get('/users/lastname/:lastname', (req, res)=>{
     personas_filtro.forEach(persona => console.log(persona));
     console.log("***********FIN LISTA DE APELLIDOS***********");
     const n=personas_filtro.length;
-    res.status(200).send(`Total usuarios: ${n}`);
+    res.status(200).send(personas_filtro);
 });
 app.get('/users/gender/:gender', (req, res)=>{
     const g = req.params.gender;
@@ -53,7 +56,7 @@ app.get('/users/gender/:gender', (req, res)=>{
     personas_filtro.forEach(persona => console.log(persona));
     console.log("***********FIN LISTA DE GENERO***********");
     const n=personas_filtro.length;
-    res.status(200).send(`Total usuarios: ${n}`);
+    res.status(200).send(personas_filtro);
 });
 
 app.get('/users/telephone', (req, res)=>{
@@ -62,7 +65,7 @@ app.get('/users/telephone', (req, res)=>{
     personas_filtro.forEach(persona => console.log(persona));
     console.log("***********FIN LISTA DE TELEFONO***********");
     const n=personas_filtro.length;
-    res.status(200).send(`Total usuarios: ${n}`);
+    res.status(200).send(personas_filtro);
 });
 app.get('/users/bmi/:id', (req,res)=>{
     const id = req.params.id;
@@ -73,11 +76,12 @@ app.get('/users/bmi/:id', (req,res)=>{
 
     res.status(200).send(`BMI : ${bmi}`);
 });
-app.get('/users/bmi', (req, res)=>{
 
+app.get('/users/bmi', (req, res)=>{
     var w = 0;
     var h = 0;
     var bmi = 0;
+    var IMC = [];
     personas.forEach(function(persona){
         if(persona.height>0 && persona.weight>0)
         {
@@ -85,10 +89,12 @@ app.get('/users/bmi', (req, res)=>{
             h = persona.height;
             bmi = w/(h*h);
             console.log(`Id: ${persona.identification} ,BMI : ${bmi}`);
+            IMC.push({identification:persona.identification,name:persona.name,lastname:persona.lastname,BMI:bmi})
         }
     });
-    
+    res.status(200).send(IMC);
 });
+
 app.delete('/users/:id', (req, res)=>{
     const id = req.params.id;
     if(id!=null){
