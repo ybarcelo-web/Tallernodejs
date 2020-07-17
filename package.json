@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ybarcelo-web/Taller1.git"
+    "url": "git+https://github.com/ybarcelo-web/Tallernodejs.git"
   },
   "author": "PamelaYaliza",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ybarcelo-web/Taller1/issues"
+    "url": "https://github.com/ybarcelo-web/Tallernodejs/issues"
   },
-  "homepage": "https://github.com/ybarcelo-web/Taller1#readme",
+  "homepage": "https://github.com/ybarcelo-web/Tallernodejs#readme",
   "dependencies": {
     "express": "^4.17.1"
   }
